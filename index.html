@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hypercoin.dev - FOSS developer projects</title>
+    <meta
+      name="description"
+      content="Bitcoin FOSS development projects and contributions by hypercoin developer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-orange: #f7931a;
+        --dark-bg: #0d1117;
+        --card-bg: #161b22;
+        --border-color: #30363d;
+        --text-primary: #f0f6fc;
+        --text-secondary: #8b949e;
+        --accent-blue: #58a6ff;
+        --success-green: #238636;
+        --gradient-start: #f7931a;
+        --gradient-end: #ff6b35;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: var(--dark-bg);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      header {
+        padding: 2rem 0;
+        border-bottom: 1px solid var(--border-color);
+        position: relative;
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .logo {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 1.8rem;
+        font-weight: 600;
+        background: linear-gradient(
+          135deg,
+          var(--gradient-start),
+          var(--gradient-end)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      nav a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+
+      nav a:hover {
+        color: var(--primary-orange);
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-orange);
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 5rem 0;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(
+          circle,
+          rgba(247, 147, 26, 0.1) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        z-index: -1;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        background: linear-gradient(
+          135deg,
+          var(--text-primary),
+          var(--primary-orange)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 0.8rem 2rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          var(--gradient-start),
+          var(--gradient-end)
+        );
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(247, 147, 26, 0.3);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--text-primary);
+        border: 2px solid var(--border-color);
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--primary-orange);
+        color: var(--primary-orange);
+      }
+
+      /* Projects Section */
+      .projects {
+        padding: 5rem 0;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 3rem;
+        color: var(--text-primary);
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .project-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--gradient-start),
+          var(--gradient-end)
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary-orange);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .project-card:hover::before {
+        opacity: 1;
+      }
+
+      .project-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .project-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+      }
+
+      .project-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .project-description {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .tech-tag {
+        background: var(--border-color);
+        color: var(--text-secondary);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+
+      .project-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .project-link {
+        color: var(--accent-blue);
+        text-decoration: none;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        transition: color 0.3s ease;
+      }
+
+      .project-link:hover {
+        color: var(--primary-orange);
+      }
+
+      /* Status badges */
+      .status {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.3rem 0.8rem;
+        border-radius: 15px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .status.live {
+        background: rgba(35, 134, 54, 0.2);
+        color: var(--success-green);
+        border: 1px solid var(--success-green);
+      }
+
+      .status.development {
+        background: rgba(255, 107, 53, 0.2);
+        color: var(--gradient-end);
+        border: 1px solid var(--gradient-end);
+      }
+
+      .status.planning {
+        background: rgba(139, 148, 158, 0.2);
+        color: var(--text-secondary);
+        border: 1px solid var(--text-secondary);
+      }
+
+      /* About Section */
+      .about {
+        padding: 5rem 0;
+        background: var(--card-bg);
+      }
+
+      .about-image {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .profile-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        object-fit: cover;
+        border: 3px solid var(--border-color);
+        transition: all 0.3s ease;
+      }
+
+      .profile-image:hover {
+        border-color: var(--primary-orange);
+        transform: scale(1.02);
+        box-shadow: 0 20px 40px rgba(247, 147, 26, 0.2);
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 3rem;
+        align-items: center;
+      }
+
+      .about-text h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+      }
+
+      .about-text p {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+      }
+
+      .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .skill {
+        background: var(--dark-bg);
+        color: var(--text-primary);
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        border: 1px solid var(--border-color);
+        font-weight: 500;
+      }
+
+      /* Contact Section */
+      .contact {
+        padding: 5rem 0;
+        text-align: center;
+      }
+
+      .contact-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .contact-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 1rem 1.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .contact-link:hover {
+        color: var(--primary-orange);
+        border-color: var(--primary-orange);
+        transform: translateY(-2px);
+      }
+
+      /* Footer */
+      footer {
+        padding: 2rem 0;
+        border-top: 1px solid var(--border-color);
+        text-align: center;
+        color: var(--text-secondary);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.1rem;
+        }
+
+        .about-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .nav ul {
+          gap: 1rem;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .contact-links {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .project-card {
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      .project-card:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+
+      .project-card:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">hypercoin.dev</div>
+          <nav>
+            <ul>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <h1>Bitcoin Research and FOSS Development</h1>
+          <p>
+            Building open-source tools with emphasis on the Bitcoin ecosystem.
+          </p>
+          <div class="cta-buttons">
+            <a href="https://github.com/hypercoind" class="btn btn-secondary">
+              <span>GitHub</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="projects">
+        <div class="container">
+          <h2 class="section-title">Featured Projects</h2>
+          <div class="projects-grid">
+            <div class="project-card">
+              <div class="status live">Live</div>
+              <div class="project-header">
+                <div class="project-icon">
+                  <img
+                    src="images/apod_oct31_2008.jpg"
+                    alt="hypercoin.info project icon"
+                    class="profile-image"
+                  />
+                </div>
+                <div class="project-title">hypercoin.info</div>
+              </div>
+              <div class="project-description">
+                A comprehensive Bitcoin and macro research site.
+              </div>
+              <div class="project-tech">
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">HTML/CSS</span>
+                <span class="tech-tag">Markdown</span>
+              </div>
+              <div class="project-links">
+                <a href="https://hypercoin.info" class="project-link">
+                  Site ↗
+                </a>
+                <a
+                  href="https://github.com/hypercoind/hypercoin-research"
+                  class="project-link"
+                >
+                  GitHub ↗
+                </a>
+              </div>
+            </div>
+
+            <!--
+                    <div class="project-card">
+                        <div class="status development">In Development</div>
+                        <div class="project-header">
+                            <div class="project-icon">⚡</div>
+                            <div class="project-title">Lightning Tools</div>
+                        </div>
+                        <div class="project-description">
+                            A collection of developer tools and utilities for Lightning Network development, including payment channel management and routing optimization tools.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Go</span>
+                            <span class="tech-tag">LND</span>
+                            <span class="tech-tag">gRPC</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                GitHub ↗
+                            </a>
+                            <a href="#" class="project-link">
+                                Documentation ↗
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="status planning">Planning</div>
+                        <div class="project-header">
+                            <div class="project-icon">🔧</div>
+                            <div class="project-title">Bitcoin Dev Kit Extensions</div>
+                        </div>
+                        <div class="project-description">
+                            Contributing to Bitcoin Development Kit (BDK) with focus on wallet functionality improvements and Python bindings for educational purposes.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Rust</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">BDK</span>
+                            <span class="tech-tag">Descriptors</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                Roadmap ↗
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="status development">In Development</div>
+                        <div class="project-header">
+                            <div class="project-icon">📚</div>
+                            <div class="project-title">FOSS Contributor Guide</div>
+                        </div>
+                        <div class="project-description">
+                            An interactive guide for newcomers to Bitcoin FOSS development, featuring step-by-step tutorials, code examples, and contribution workflows.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">MDX</span>
+                            <span class="tech-tag">Tutorials</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                Preview ↗
+                            </a>
+                            <a href="#" class="project-link">
+                                GitHub ↗
+                            </a>
+                        </div>
+                    </div>
+                -->
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="about">
+        <div class="container">
+          <div class="about-content">
+            <div class="about-image">
+              <img
+                src="images/hypercoind_pfp.jpg"
+                alt="hypercoin developer pfp"
+                class="profile-image"
+              />
+            </div>
+            <div class="about-text">
+              <h2>About hypercoin</h2>
+              <p>
+                I'm an intermediate developer passionate about Bitcoin and
+                open-source software. With experience in multiple programming
+                languages and a commitment to FOSS principles, I focus on
+                building tools that make Bitcoin more accessible and
+                developer-friendly.
+              </p>
+              <p>
+                My journey in Bitcoin development started with curiosity and has
+                evolved into active contributions to the ecosystem. I believe in
+                the power of open collaboration and the importance of financial
+                sovereignty through decentralized technology.
+              </p>
+              <div class="skills">
+                <span class="skill">Python</span>
+                <span class="skill">Go</span>
+                <span class="skill">C#</span>
+                <span class="skill">JavaScript</span>
+                <span class="skill">Bitcoin Core</span>
+                <span class="skill">Lightning Network</span>
+                <span class="skill">FOSS Development</span>
+                <span class="skill">Git</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <div class="container">
+          <h2 class="section-title">Let's Connect</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 2rem">
+            Interested in collaborating or discussing development? Reach out
+            through any of these channels.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:hypercoin@hypercoin.dev" class="contact-link">
+              <span>📧</span>
+              <span>Email</span>
+            </a>
+            <a href="https://github.com/hypercoind" class="contact-link">
+              <span>🐙</span>
+              <span>GitHub</span>
+            </a>
+            <a href="https://twitter.com/hypercoind" class="contact-link">
+              <span>🐦</span>
+              <span>Twitter</span>
+            </a>
+            <a href="https://hypercoin.info" class="contact-link">
+              <span>🌐</span>
+              <span>hypercoin.info</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 hypercoin.dev</p>
+      </div>
+    </footer>
+
+    <script>
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Add scroll effect to navigation
+      window.addEventListener("scroll", () => {
+        const header = document.querySelector("header");
+        if (window.scrollY > 100) {
+          header.style.background = "rgba(13, 17, 23, 0.95)";
+          header.style.backdropFilter = "blur(10px)";
+        } else {
+          header.style.background = "transparent";
+          header.style.backdropFilter = "none";
+        }
+      });
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".project-card").forEach((card) => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(30px)";
+        card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        observer.observe(card);
+      });
+    </script>
+  </body>
+</html>
