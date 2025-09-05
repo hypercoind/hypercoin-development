@@ -96,7 +96,8 @@ nav a:hover::after {
 
 /* Hero Section */
 .hero {
-  padding: 5rem 0;
+  padding: 10rem 0 0 0;
+  min-height: 100vh;
   text-align: center;
   position: relative;
 }
@@ -106,9 +107,9 @@ nav a:hover::after {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
-  height: 300px;
+  transform: translate(-50%, -60%);
+  width: 400px;
+  height: 400px;
   background: radial-gradient(
     circle,
     rgba(247, 147, 26, 0.1) 0%,
