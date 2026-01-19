@@ -313,6 +313,11 @@ nav a:not(.nav-icon):hover::after {
   border-radius: 25px;
   border: 1px solid var(--border-color);
   font-weight: 500;
+  transition: border-color 0.3s ease;
+}
+
+.skill:hover {
+  border-color: var(--primary-orange);
 }
 
 /* Footer */
@@ -322,6 +327,10 @@ footer {
   background: var(--card-bg);
   color: var(--text-secondary);
   flex-shrink: 0;
+}
+
+footer * {
+  cursor: default;
 }
 
 footer .container {
