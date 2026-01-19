@@ -6,9 +6,8 @@ const projects = await getCollection('projects');
 const sortedProjects = projects.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
 ---
 
-<section id="projects" class="projects">
+<section id="projects" class="projects projects-hero">
   <div class="container">
-    <h2 class="section-title">Featured Projects</h2>
     <div class="projects-grid">
       {sortedProjects.map((project) => (
         <ProjectCard

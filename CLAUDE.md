@@ -6,23 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a static portfolio website for a Bitcoin/FOSS developer. Built with Astro and TypeScript using content collections for project management.
 
-## Development
+## Development (Docker - Primary Workflow)
 
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
-## Docker
+Docker is the primary build and test workflow for this project.
 
 ```bash
 # Development with hot reload
@@ -39,6 +25,24 @@ docker run -p 8080:80 hypercoin-dev
 - Development server available at http://localhost:4321
 - Production server available at http://localhost:8080
 
+## Local Development (Alternative)
+
+For local development without Docker:
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
 ## Architecture
 
 ### File Structure
@@ -50,13 +54,11 @@ src/
 ├── layouts/
 │   └── BaseLayout.astro    # HTML shell, meta tags, fonts
 ├── components/
-│   ├── Header.astro        # Site header with nav
-│   ├── Footer.astro        # Site footer
-│   ├── Hero.astro          # Hero section
+│   ├── Header.astro        # Site header with logo, tagline, nav
+│   ├── Footer.astro        # Site footer with social icons
 │   ├── ProjectCard.astro   # Individual project card
 │   ├── ProjectGrid.astro   # Grid of all projects
-│   ├── About.astro         # About section
-│   ├── Contact.astro       # Contact section
+│   ├── About.astro         # Compact horizontal about section
 │   ├── StatusBadge.astro   # Project status indicator
 │   └── SkillTag.astro      # Reusable skill/tech tag
 ├── pages/
@@ -114,7 +116,8 @@ When adding new external resources, update the CSP meta tag in `src/layouts/Base
 1. Create a new markdown file in `src/content/projects/`
 2. Add required frontmatter (title, description, status, tech)
 3. Write project content in markdown
-4. The project will automatically appear on the home page and get its own detail page at `/projects/[slug]/`
+4. Rebuild with `docker compose up prod --build` to verify
+5. The project will automatically appear on the home page and get its own detail page at `/projects/[slug]/`
 
 ## External Dependencies
 
