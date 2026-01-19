@@ -89,7 +89,7 @@ header.scrolled {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-decoration: none;
+  cursor: default;
 }
 
 .tagline {
@@ -98,6 +98,7 @@ header.scrolled {
   font-weight: 500;
   padding-left: 1rem;
   border-left: 1px solid var(--border-color);
+  cursor: default;
 }
 
 nav ul {
