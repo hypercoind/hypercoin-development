@@ -1,0 +1,32 @@
+---
+---
+
+<header id="site-header">
+  <div class="container">
+    <div class="header-content">
+      <a href="/" class="logo">hypercoin.dev</a>
+      <nav>
+        <ul>
+          <li><a href="/#projects">Projects</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+
+  function handleScroll() {
+    if (window.scrollY > 100) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll);
+  handleScroll();
+</script>

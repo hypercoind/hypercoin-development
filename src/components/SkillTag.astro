@@ -1,0 +1,10 @@
+---
+interface Props {
+  name: string;
+  variant?: 'skill' | 'tech';
+}
+
+const { name, variant = 'skill' } = Astro.props;
+---
+
+<span class={variant === 'tech' ? 'tech-tag' : 'skill'}>{name}</span>

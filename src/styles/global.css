@@ -1,3 +1,4 @@
+/* Design Tokens */
 :root {
   --primary-orange: #f7931a;
   --dark-bg: #0d1117;
@@ -11,21 +12,28 @@
   --gradient-end: #ff6b35;
 }
 
-* {
+/* CSS Reset */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--dark-bg);
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
 }
 
+/* Utility Classes */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -37,6 +45,12 @@ header {
   padding: 2rem 0;
   border-bottom: 1px solid var(--border-color);
   position: relative;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+header.scrolled {
+  background: rgba(13, 17, 23, 0.95);
+  backdrop-filter: blur(10px);
 }
 
 .header-content {
@@ -51,14 +65,11 @@ header {
   font-family: "JetBrains Mono", monospace;
   font-size: 1.8rem;
   font-weight: 600;
-  background: linear-gradient(
-    135deg,
-    var(--gradient-start),
-    var(--gradient-end)
-  );
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-decoration: none;
 }
 
 nav ul {
@@ -110,11 +121,7 @@ nav a:hover::after {
   transform: translate(-50%, -60%);
   width: 400px;
   height: 400px;
-  background: radial-gradient(
-    circle,
-    rgba(247, 147, 26, 0.1) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle, rgba(247, 147, 26, 0.1) 0%, transparent 70%);
   border-radius: 50%;
   z-index: -1;
 }
@@ -123,11 +130,7 @@ nav a:hover::after {
   font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  background: linear-gradient(
-    135deg,
-    var(--text-primary),
-    var(--primary-orange)
-  );
+  background: linear-gradient(135deg, var(--text-primary), var(--primary-orange));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -149,6 +152,7 @@ nav a:hover::after {
   flex-wrap: wrap;
 }
 
+/* Buttons */
 .btn {
   padding: 0.8rem 2rem;
   border: none;
@@ -163,11 +167,7 @@ nav a:hover::after {
 }
 
 .btn-primary {
-  background: linear-gradient(
-    135deg,
-    var(--gradient-start),
-    var(--gradient-end)
-  );
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
   color: white;
 }
 
@@ -187,17 +187,18 @@ nav a:hover::after {
   color: var(--primary-orange);
 }
 
-/* Projects Section */
-.projects {
-  padding: 5rem 0;
-}
-
+/* Section Titles */
 .section-title {
   text-align: center;
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
   color: var(--text-primary);
+}
+
+/* Projects Section */
+.projects {
+  padding: 5rem 0;
 }
 
 .projects-grid {
@@ -207,6 +208,7 @@ nav a:hover::after {
   margin-top: 2rem;
 }
 
+/* Project Card */
 .project-card {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -224,11 +226,7 @@ nav a:hover::after {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(
-    90deg,
-    var(--gradient-start),
-    var(--gradient-end)
-  );
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -259,6 +257,13 @@ nav a:hover::after {
   justify-content: center;
   font-size: 1.5rem;
   color: white;
+  overflow: hidden;
+}
+
+.project-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .project-title {
@@ -280,15 +285,6 @@ nav a:hover::after {
   margin-bottom: 1.5rem;
 }
 
-.tech-tag {
-  background: var(--border-color);
-  color: var(--text-secondary);
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
 .project-links {
   display: flex;
   gap: 1rem;
@@ -308,7 +304,7 @@ nav a:hover::after {
   color: var(--primary-orange);
 }
 
-/* Status badges */
+/* Status Badge */
 .status {
   position: absolute;
   top: 1rem;
@@ -336,6 +332,26 @@ nav a:hover::after {
   background: rgba(139, 148, 158, 0.2);
   color: var(--text-secondary);
   border: 1px solid var(--text-secondary);
+}
+
+/* Tech Tag */
+.tech-tag {
+  background: var(--border-color);
+  color: var(--text-secondary);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Skill Tag */
+.skill {
+  background: var(--dark-bg);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  border: 1px solid var(--border-color);
+  font-weight: 500;
 }
 
 /* About Section */
@@ -394,15 +410,6 @@ nav a:hover::after {
   margin-top: 2rem;
 }
 
-.skill {
-  background: var(--dark-bg);
-  color: var(--text-primary);
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
-  border: 1px solid var(--border-color);
-  font-weight: 500;
-}
-
 /* Contact Section */
 .contact {
   padding: 5rem 0;
@@ -444,6 +451,96 @@ footer {
   color: var(--text-secondary);
 }
 
+/* Project Detail Page */
+.project-detail {
+  padding: 5rem 0;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.project-detail h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.project-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.project-detail-content {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.project-detail-content h2 {
+  color: var(--text-primary);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.project-detail-content p {
+  margin-bottom: 1rem;
+}
+
+.project-detail-content ul,
+.project-detail-content ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.project-detail-content li {
+  margin-bottom: 0.5rem;
+}
+
+.project-detail-content a {
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+.project-detail-content a:hover {
+  color: var(--primary-orange);
+}
+
+.project-detail-content code {
+  font-family: "JetBrains Mono", monospace;
+  background: var(--dark-bg);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.project-detail-content pre {
+  background: var(--dark-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.project-detail-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-blue);
+  text-decoration: none;
+  margin-bottom: 2rem;
+}
+
+.back-link:hover {
+  color: var(--primary-orange);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero h1 {
@@ -459,7 +556,7 @@ footer {
     text-align: center;
   }
 
-  .nav ul {
+  nav ul {
     gap: 1rem;
   }
 

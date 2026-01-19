@@ -1,0 +1,38 @@
+---
+import SkillTag from './SkillTag.astro';
+
+interface Props {
+  name?: string;
+  bio?: string;
+  image?: string;
+  skills?: string[];
+}
+
+const {
+  name = "hypercoin",
+  bio = "I'm an intermediate developer passionate about Bitcoin and open-source software.",
+  image = "/images/hypercoind_pfp.jpg",
+  skills = ["Python", "Go", "C#", "Shell", "Web Development", "DevOps"],
+} = Astro.props;
+---
+
+<section id="about" class="about">
+  <div class="container">
+    <div class="about-content">
+      <div class="about-image">
+        <img
+          src={image}
+          alt={`${name} developer profile`}
+          class="profile-image"
+        />
+      </div>
+      <div class="about-text">
+        <h2>About {name}</h2>
+        <p>{bio}</p>
+        <div class="skills">
+          {skills.map((skill) => <SkillTag name={skill} />)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

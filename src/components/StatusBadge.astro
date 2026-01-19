@@ -1,0 +1,15 @@
+---
+interface Props {
+  status: 'live' | 'development' | 'planning';
+}
+
+const { status } = Astro.props;
+
+const labels: Record<typeof status, string> = {
+  live: 'Live',
+  development: 'Development',
+  planning: 'Planning',
+};
+---
+
+<div class={`status ${status}`}>{labels[status]}</div>

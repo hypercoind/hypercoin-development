@@ -1,0 +1,59 @@
+---
+import StatusBadge from './StatusBadge.astro';
+import SkillTag from './SkillTag.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  status: 'live' | 'development' | 'planning';
+  tech: string[];
+  siteUrl?: string;
+  repoUrl?: string;
+  icon?: string;
+  slug: string;
+}
+
+const { title, description, status, tech, siteUrl, repoUrl, icon, slug } = Astro.props;
+---
+
+<div class="project-card">
+  <StatusBadge status={status} />
+  <div class="project-header">
+    {icon && (
+      <div class="project-icon">
+        <img src={icon} alt={`${title} project icon`} />
+      </div>
+    )}
+    <a href={`/projects/${slug}/`} class="project-title">{title}</a>
+  </div>
+  <div class="project-description">{description}</div>
+  <div class="project-tech">
+    {tech.map((t) => <SkillTag name={t} variant="tech" />)}
+  </div>
+  <div class="project-links">
+    {siteUrl && (
+      <a href={siteUrl} class="project-link" target="_blank" rel="noopener noreferrer">
+        Site ↗
+      </a>
+    )}
+    {repoUrl && (
+      <a href={repoUrl} class="project-link" target="_blank" rel="noopener noreferrer">
+        GitHub ↗
+      </a>
+    )}
+  </div>
+</div>
+
+<style>
+  .project-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .project-title:hover {
+    color: var(--primary-orange);
+  }
+</style>
