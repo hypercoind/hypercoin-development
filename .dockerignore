@@ -5,3 +5,7 @@ dist/
 .gitignore
 *.md
 .DS_Store
+.env*
+.claude
+.vscode
+.idea

@@ -1,6 +1,7 @@
 services:
   dev:
-    image: node:20-alpine
+    image: node:20.18-alpine
+    container_name: hypercoin-development-dev
     working_dir: /app
     volumes:
       - .:/app
