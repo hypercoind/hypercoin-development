@@ -18,18 +18,20 @@ const displayTech = tech.slice(0, 3);
 ---
 
 <div class="project-card">
-  <StatusBadge status={status} />
-  <div class="project-header">
-    {icon && (
-      <div class="project-icon">
-        <img src={icon} alt={`${title} project icon`} />
-      </div>
-    )}
-    <a href={`/projects/${slug}/`} class="project-title">{title}</a>
-  </div>
-  <div class="project-description">{description}</div>
-  <div class="project-tech">
-    {displayTech.map((t) => <SkillTag name={t} variant="tech" />)}
+  {icon && (
+    <div class="project-icon">
+      <img src={icon} alt={`${title} project icon`} />
+    </div>
+  )}
+  <div class="project-content">
+    <div class="project-header">
+      <a href={`/projects/${slug}/`} class="project-title">{title}</a>
+      <StatusBadge status={status} />
+    </div>
+    <div class="project-description">{description}</div>
+    <div class="project-tech">
+      {displayTech.map((t) => <SkillTag name={t} variant="tech" />)}
+    </div>
   </div>
   <div class="project-links">
     {siteUrl && (
