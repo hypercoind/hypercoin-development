@@ -23,6 +23,8 @@
 
 html {
   scroll-behavior: smooth;
+  height: 100vh;
+  overflow: hidden;
 }
 
 body {
@@ -31,6 +33,17 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 /* Utility Classes */
@@ -42,10 +55,11 @@ body {
 
 /* Header */
 header {
-  padding: 2rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid var(--border-color);
   position: relative;
   transition: background 0.3s ease, backdrop-filter 0.3s ease;
+  flex-shrink: 0;
 }
 
 header.scrolled {
@@ -137,11 +151,15 @@ nav a:not(.nav-icon):hover::after {
 
 /* Projects Section */
 .projects {
-  padding: 5rem 0;
+  padding: 1rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .projects-hero {
-  padding-top: 6rem;
+  padding-top: 1rem;
 }
 
 .projects-grid {
@@ -155,7 +173,7 @@ nav a:not(.nav-icon):hover::after {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  padding: 2rem;
+  padding: 1rem 1.5rem;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -216,15 +234,15 @@ nav a:not(.nav-icon):hover::after {
 
 .project-description {
   color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
 }
 
 .project-tech {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .project-links {
@@ -296,100 +314,65 @@ nav a:not(.nav-icon):hover::after {
   font-weight: 500;
 }
 
-/* About Section - Compact Horizontal */
-.about-compact {
-  padding: 2rem 0;
-  background: var(--card-bg);
+/* Footer */
+footer {
+  padding: 1rem 0;
   border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  flex-shrink: 0;
 }
 
-.about-row {
+footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer-about {
   display: flex;
   align-items: center;
   gap: 2rem;
   flex-wrap: wrap;
 }
 
-.about-avatar {
-  flex-shrink: 0;
-}
-
 .avatar-image {
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--border-color);
   transition: border-color 0.3s ease;
+  flex-shrink: 0;
 }
 
 .avatar-image:hover {
   border-color: var(--primary-orange);
 }
 
-.about-bio {
+.footer-bio {
   flex: 1;
   min-width: 200px;
-}
-
-.about-bio p {
   color: var(--text-secondary);
   font-size: 1rem;
   margin: 0;
 }
 
-.about-skills {
+.footer-skills {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.about-skills .skill {
-  padding: 0.4rem 0.8rem;
-  font-size: 0.85rem;
-}
-
-/* Footer */
-footer {
-  padding: 2rem 0;
-  border-top: 1px solid var(--border-color);
-  color: var(--text-secondary);
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.footer-social {
-  display: flex;
-  gap: 1rem;
-}
-
-.social-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  transition: all 0.3s ease;
-}
-
-.social-icon:hover {
-  color: var(--primary-orange);
-  border-color: var(--primary-orange);
-  transform: translateY(-2px);
+.footer-skills .skill {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
 }
 
 .footer-copyright {
   margin: 0;
+  flex-shrink: 0;
 }
 
 /* Project Detail Page */
@@ -503,21 +486,16 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .about-row {
+  footer .container {
     flex-direction: column;
     text-align: center;
   }
 
-  .about-skills {
-    justify-content: center;
-  }
-
-  .footer-content {
+  .footer-about {
     flex-direction: column;
-    text-align: center;
   }
 
-  .footer-social {
+  .footer-skills {
     justify-content: center;
   }
 }

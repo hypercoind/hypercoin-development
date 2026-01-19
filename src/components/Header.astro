@@ -1,9 +1,13 @@
 ---
 interface Props {
+  email?: string;
+  twitter?: string;
   githubUrl?: string;
 }
 
 const {
+  email = "hypercoin@hypercoin.dev",
+  twitter = "https://x.com/hypercoind",
   githubUrl = "https://github.com/hypercoind",
 } = Astro.props;
 ---
@@ -17,7 +21,21 @@ const {
       </div>
       <nav>
         <ul>
-          <li><a href="/#about">About</a></li>
+          <li>
+            <a href={`mailto:${email}`} class="nav-icon" aria-label="Email">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href={twitter} target="_blank" rel="noopener noreferrer" class="nav-icon" aria-label="X (Twitter)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
+              </svg>
+            </a>
+          </li>
           <li>
             <a href={githubUrl} target="_blank" rel="noopener noreferrer" class="nav-icon" aria-label="GitHub">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
