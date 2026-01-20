@@ -1,6 +1,6 @@
 ---
 title: hypercoin.info
-description: A comprehensive Bitcoin analysis tool site.
+description: A Bitcoin analysis tool site.
 status: live
 tech:
   - JavaScript
@@ -15,7 +15,7 @@ sortOrder: 1
 
 ## About
 
-hypercoin.info is a comprehensive Bitcoin analysis tool site providing insights and research into the Bitcoin ecosystem.
+hypercoin.info is a Bitcoin analysis tool site providing insights and research into the Bitcoin ecosystem.
 
 ## Features
 
