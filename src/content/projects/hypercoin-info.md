@@ -10,7 +10,7 @@ siteUrl: https://hypercoin.info
 repoUrl: https://github.com/hypercoind/hypercoin-research
 icon: /images/bh_rjn.jpg
 featured: true
-sortOrder: 3
+sortOrder: 1
 ---
 
 ## About

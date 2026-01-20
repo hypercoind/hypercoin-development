@@ -1,12 +1,12 @@
 ---
 title: Hypercharts
 description: A macro chart app.
-status: live
+status: development
 tech:
   - TypeScript
   - Charts
 featured: true
-sortOrder: 2
+sortOrder: 3
 ---
 
 ## About

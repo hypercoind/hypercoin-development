@@ -1,12 +1,12 @@
 ---
 title: TON3S
 description: A writing app for nostr.
-status: live
+status: development
 tech:
   - TypeScript
   - Nostr
 featured: true
-sortOrder: 1
+sortOrder: 2
 ---
 
 ## About
