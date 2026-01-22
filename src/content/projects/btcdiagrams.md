@@ -8,6 +8,7 @@ tech:
   - Docker
 siteUrl: https://btcdiagrams.com
 repoUrl: https://github.com/hypercoind/btcdiagrams.com
+icon: /images/btcdiagrams-icon.svg
 featured: true
 sortOrder: 4
 ---
