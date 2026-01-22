@@ -10,10 +10,9 @@ interface Props {
   siteUrl?: string;
   repoUrl?: string;
   icon?: string;
-  slug: string;
 }
 
-const { title, description, status, tech, siteUrl, repoUrl, icon, slug } = Astro.props;
+const { title, description, status, tech, siteUrl, repoUrl, icon } = Astro.props;
 const displayTech = tech.slice(0, 3);
 ---
 
@@ -25,7 +24,7 @@ const displayTech = tech.slice(0, 3);
   )}
   <div class="project-content">
     <div class="project-header">
-      <a href={`/projects/${slug}/`} class="project-title">{title}</a>
+      <h3 class="project-title">{title}</h3>
       <StatusBadge status={status} />
     </div>
     <div class="project-description">{description}</div>
@@ -58,12 +57,7 @@ const displayTech = tech.slice(0, 3);
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--text-primary);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  .project-title:hover {
-    color: var(--primary-orange);
+    margin: 0;
   }
 
   .project-link-icon {
