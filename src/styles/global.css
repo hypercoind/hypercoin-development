@@ -164,11 +164,12 @@ nav a:not(.nav-icon):hover::after {
 }
 
 .projects-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
+  align-items: stretch;
 }
 
 /* Project Card */
@@ -176,13 +177,15 @@ nav a:not(.nav-icon):hover::after {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  padding: 0.875rem 1.25rem;
+  padding: 1rem 1.25rem;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1rem;
+  min-height: 100px;
 }
 
 .project-card::before {
@@ -198,7 +201,7 @@ nav a:not(.nav-icon):hover::after {
 }
 
 .project-card:hover {
-  transform: translateX(5px);
+  transform: translateY(-3px);
   border-color: var(--primary-orange);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
@@ -208,13 +211,13 @@ nav a:not(.nav-icon):hover::after {
 }
 
 .project-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: white;
   overflow: hidden;
   flex-shrink: 0;
@@ -234,33 +237,39 @@ nav a:not(.nav-icon):hover::after {
 .project-header {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.25rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .project-title {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .project-description {
   color: var(--text-secondary);
-  margin-bottom: 0.375rem;
+  margin-bottom: 0.25rem;
   line-height: 1.4;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .project-tech {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.375rem;
 }
 
 .project-links {
   display: flex;
-  gap: 0.75rem;
+  flex-direction: column;
+  gap: 0.5rem;
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 .project-link {
@@ -309,9 +318,9 @@ nav a:not(.nav-icon):hover::after {
 .tech-tag {
   background: var(--border-color);
   color: var(--text-secondary);
-  padding: 0.3rem 0.8rem;
+  padding: 0.2rem 0.6rem;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 500;
 }
 
@@ -502,24 +511,44 @@ footer .container {
     gap: 1rem;
   }
 
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    max-width: 100%;
+  }
+
   .project-card {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.75rem;
+    gap: 0.75rem;
+    min-height: 80px;
   }
 
   .project-icon {
-    width: 45px;
-    height: 45px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .project-title {
+    font-size: 0.9rem;
+  }
+
+  .project-description {
+    font-size: 0.75rem;
+  }
+
+  .project-tech {
+    display: none;
   }
 
   .project-links {
-    width: 100%;
-    justify-content: flex-start;
+    flex-direction: column;
+    gap: 0.375rem;
   }
 
-  .projects-grid {
-    max-width: 100%;
+  .project-link {
+    font-size: 0.8rem;
   }
 
   footer .container {
