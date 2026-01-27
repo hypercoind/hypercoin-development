@@ -5,6 +5,7 @@ status: development
 tech:
   - TypeScript
   - Charts
+icon: /images/hypercharts-icon.svg
 featured: true
 sortOrder: 3
 ---

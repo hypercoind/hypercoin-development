@@ -5,6 +5,7 @@ status: development
 tech:
   - TypeScript
   - Nostr
+icon: /images/ton3s-icon.svg
 featured: true
 sortOrder: 2
 ---

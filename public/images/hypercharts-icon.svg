@@ -1,0 +1,14 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="12" fill="#18181B"/>
+  <!-- Left converging waves -->
+  <path d="M8 24C14 21 14 27 20 24" stroke="#0891B2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M8 32C16 28 16 36 26 32" stroke="#06B6D4" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M8 40C18 35 18 45 28 40" stroke="#22D3EE" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Right converging waves -->
+  <path d="M56 24C50 21 50 27 44 24" stroke="#0891B2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M56 32C48 28 48 36 38 32" stroke="#06B6D4" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M56 40C46 35 46 45 36 40" stroke="#22D3EE" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Center focal point -->
+  <circle cx="32" cy="32" r="5" fill="#22D3EE" fill-opacity="0.3"/>
+  <circle cx="32" cy="32" r="2.5" fill="#22D3EE"/>
+</svg>
