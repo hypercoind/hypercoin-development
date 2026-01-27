@@ -10,6 +10,13 @@
   --success-green: #238636;
   --gradient-start: #f7931a;
   --gradient-end: #ff6b35;
+
+  /* Space Theme Tokens */
+  --space-purple: #7c3aed;
+  --space-purple-dim: rgba(124, 58, 237, 0.15);
+  --space-blue: #3b82f6;
+  --space-blue-dim: rgba(59, 130, 246, 0.1);
+  --orange-glow: rgba(247, 147, 26, 0.4);
 }
 
 /* CSS Reset */
@@ -37,6 +44,57 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+/* Starfield Background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: -2;
+  background-image:
+    radial-gradient(1px 1px at 50px 80px, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1.5px 1.5px at 120px 30px, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 200px 150px, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1.2px 1.2px at 300px 60px, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 380px 180px, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1.5px 1.5px at 70px 200px, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 250px 220px, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1.3px 1.3px at 350px 120px, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 150px 100px, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1.2px 1.2px at 400px 40px, rgba(255, 255, 255, 0.5), transparent);
+  background-size: 420px 250px;
+  animation: twinkle 8s ease-in-out infinite;
+}
+
+/* Nebula Corner Gradients */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 600px 400px at top right, var(--space-purple-dim), transparent 70%),
+    radial-gradient(ellipse 500px 350px at bottom left, var(--space-blue-dim), transparent 70%);
+  opacity: 0.5;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 main {
@@ -90,6 +148,7 @@ header.scrolled {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   cursor: default;
+  filter: drop-shadow(0 0 20px var(--orange-glow));
 }
 
 .tagline {
@@ -127,7 +186,7 @@ nav a:not(.nav-icon)::after {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--primary-orange);
+  background: linear-gradient(90deg, var(--primary-orange), var(--space-purple));
   transition: width 0.3s ease;
 }
 
@@ -203,7 +262,7 @@ nav a:not(.nav-icon):hover::after {
 .project-card:hover {
   transform: translateY(-3px);
   border-color: var(--primary-orange);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--orange-glow);
 }
 
 .project-card:hover::before {
@@ -300,6 +359,16 @@ nav a:not(.nav-icon):hover::after {
   background: rgba(35, 134, 54, 0.2);
   color: var(--success-green);
   border: 1px solid var(--success-green);
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(35, 134, 54, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(35, 134, 54, 0.6);
+  }
 }
 
 .status.development {
@@ -322,6 +391,14 @@ nav a:not(.nav-icon):hover::after {
   border-radius: 20px;
   font-size: 0.7rem;
   font-weight: 500;
+  border: 1px solid transparent;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.tech-tag:hover {
+  background: var(--space-purple-dim);
+  border-color: var(--space-purple);
+  color: var(--text-primary);
 }
 
 /* Skill Tag */
@@ -346,6 +423,18 @@ footer {
   background: var(--card-bg);
   color: var(--text-secondary);
   flex-shrink: 0;
+  position: relative;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--space-purple), transparent);
 }
 
 footer * {
@@ -406,6 +495,23 @@ footer .container {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  /* Reduce space effects on mobile */
+  body::before {
+    opacity: 0.4;
+  }
+
+  body::after {
+    opacity: 0.3;
+  }
+
+  .logo {
+    filter: drop-shadow(0 0 10px var(--orange-glow));
+  }
+
+  .project-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
   .container {
     padding: 0 12px;
   }
@@ -547,4 +653,23 @@ footer .container {
 
 .project-card:nth-child(3) {
   animation-delay: 0.2s;
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+
+  .status.live {
+    animation: none;
+  }
+
+  .project-card {
+    animation: none;
+  }
+
+  .logo {
+    filter: none;
+  }
 }
