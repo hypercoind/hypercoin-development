@@ -62,5 +62,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body>
     <slot />
+    <script>
+      import '../scripts/scroll-effects.ts';
+    </script>
   </body>
 </html>

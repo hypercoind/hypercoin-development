@@ -48,18 +48,3 @@ const {
     </div>
   </div>
 </header>
-
-<script>
-  const header = document.getElementById('site-header');
-
-  function handleScroll() {
-    if (window.scrollY > 100) {
-      header?.classList.add('scrolled');
-    } else {
-      header?.classList.remove('scrolled');
-    }
-  }
-
-  window.addEventListener('scroll', handleScroll);
-  handleScroll();
-</script>
