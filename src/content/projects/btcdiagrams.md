@@ -4,8 +4,7 @@ description: Bitcoin infographics and educational diagrams.
 status: live
 tech:
   - TypeScript
-  - Next.js
-  - Docker
+  - Astro
 siteUrl: https://btcdiagrams.com
 repoUrl: https://github.com/hypercoind/btcdiagrams.com
 icon: /images/btcdiagrams-icon.svg
@@ -26,4 +25,4 @@ btcdiagrams.com is an educational platform featuring Bitcoin infographics and di
 
 ## Tech Stack
 
-Built with Next.js and TypeScript, using static site generation for fast loading. Docker deployment ready.
+Built with Next.js and TypeScript, using Astro framework for static site generation for fast loading. Docker deployment ready.

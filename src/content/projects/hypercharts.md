@@ -3,8 +3,8 @@ title: Hypercharts
 description: A macro chart app.
 status: development
 tech:
-  - TypeScript
-  - Charts
+  - Python
+  - VanillaJS
 icon: /images/hypercharts-icon.svg
 featured: true
 sortOrder: 3
@@ -17,3 +17,5 @@ Hypercharts is a macro chart app for visualizing economic and market data.
 - Macro data visualization
 - Interactive charts
 - Data analysis tools
+- Backend Python FastAPI
+- Frontend vanilla JavaScript

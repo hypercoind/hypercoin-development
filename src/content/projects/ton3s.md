@@ -3,8 +3,9 @@ title: TON3S
 description: A writing app for nostr.
 status: development
 tech:
-  - TypeScript
-  - Nostr
+  - JavaScript
+  - Vite
+  - Fastify
 icon: /images/ton3s-icon.svg
 featured: true
 sortOrder: 2
