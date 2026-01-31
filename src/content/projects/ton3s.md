@@ -6,6 +6,7 @@ tech:
   - JavaScript
   - Vite
   - Fastify
+siteUrl: https://ton3s.com
 icon: /images/ton3s-icon.svg
 featured: true
 sortOrder: 2
