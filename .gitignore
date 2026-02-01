@@ -25,3 +25,6 @@ pnpm-debug.log*
 .idea/
 *.swp
 *.swo
+
+# generated docs
+docs/TECHDEBT.md
