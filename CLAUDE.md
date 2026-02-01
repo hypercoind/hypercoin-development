@@ -2,129 +2,48 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Codebase Reference
+
+**Before exploring the codebase manually, read `docs/CHECKPOINT.md` first.** It contains a comprehensive map of project architecture, directory structure, module inventory, and critical paths.
+
 ## Project Overview
 
-This is a static portfolio website for a Bitcoin/FOSS developer. Built with Astro and TypeScript using content collections for project management.
+Static portfolio website for a Bitcoin/FOSS developer. Built with Astro 5.x and TypeScript, using content collections for project management. Deploys as static files to Cloudflare Pages.
 
-## Development (Docker - Primary Workflow)
+## Build & Dev Commands
 
-Docker is the primary build and test workflow for this project.
+Docker is the primary workflow:
 
 ```bash
-# Development with hot reload
-docker compose up dev
-
-# Production build and serve
-docker compose up prod --build
-
-# Standalone production build
-docker build -t hypercoin-dev .
-docker run -p 8080:80 hypercoin-dev
+docker compose up dev          # Dev server with hot reload → localhost:4321
+docker compose up prod --build # Production build + serve → localhost:8080
 ```
 
-- Development server available at http://localhost:4321
-- Production server available at http://localhost:8080
-
-## Local Development (Alternative)
-
-For local development without Docker:
+Local alternative:
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
+npm run dev      # Dev server
+npm run build    # Type-check (astro check) + build → dist/
+npm run preview  # Preview production build
 ```
+
+`npm run build` runs `astro check && astro build` — type errors will fail the build.
 
 ## Architecture
 
-### File Structure
-```
-src/
-├── content/
-│   ├── config.ts           # Project schema definition
-│   └── projects/           # Project markdown files
-├── layouts/
-│   └── BaseLayout.astro    # HTML shell, meta tags, fonts
-├── components/
-│   ├── Header.astro        # Site header with logo, tagline, nav
-│   ├── Footer.astro        # Site footer with social icons
-│   ├── ProjectCard.astro   # Individual project card
-│   ├── ProjectGrid.astro   # Grid of all projects
-│   ├── About.astro         # Compact horizontal about section
-│   ├── StatusBadge.astro   # Project status indicator
-│   └── SkillTag.astro      # Reusable skill/tech tag
-├── pages/
-│   ├── index.astro         # Home page
-│   └── projects/
-│       └── [slug].astro    # Dynamic project detail pages
-├── styles/
-│   └── global.css          # Design tokens and base styles
-└── scripts/
-    └── scroll-effects.ts   # Header scroll behavior
-```
+- **Static output** — Astro compiles to plain HTML/CSS/JS. No server runtime.
+- **Content collections** — Projects are markdown files in `src/content/projects/` with Zod-validated frontmatter (schema in `src/content/config.ts`). Each file auto-generates a page at `/projects/[slug]/`.
+- **Routing** — File-based via `src/pages/`. Home page is `index.astro`, project details via `projects/[slug].astro`.
+- **Styling** — CSS custom properties in `src/styles/global.css`. Bitcoin orange (`#f7931a`) primary. Dark theme. Space-themed visual effects. Mobile breakpoint at 768px.
+- **Production Docker** — Multi-stage build: Node builder → Nginx 1.27-alpine with non-root user.
 
-### Content Collections
+## Key Constraints
 
-Projects are defined as markdown files in `src/content/projects/` with frontmatter:
+- **CSP headers** are defined in both `src/layouts/BaseLayout.astro` (meta tags) and `nginx.conf`. When adding external resources (scripts, fonts, APIs), update the CSP in BaseLayout.astro.
+- **Google Fonts** loaded via CDN: Inter (body) and JetBrains Mono (code/tags). Already allowed in CSP.
+- Static images go in `public/images/`.
 
-```yaml
----
-title: Project Name
-description: Short description
-status: live | development | planning
-tech:
-  - Technology1
-  - Technology2
-siteUrl: https://example.com (optional)
-repoUrl: https://github.com/... (optional)
-icon: /images/icon.jpg (optional)
-featured: true | false
-sortOrder: 1
----
+## Adding a Project
 
-Detailed project content in markdown...
-```
-
-### Design Tokens
-
-CSS custom properties defined in `src/styles/global.css`:
-- `--primary-orange: #f7931a` (Bitcoin orange)
-- `--dark-bg: #0d1117`
-- `--card-bg: #161b22`
-- Mobile responsive at 768px breakpoint
-
-## Security Headers
-
-The site includes comprehensive security meta tags in BaseLayout.astro:
-- Content Security Policy (CSP)
-- X-Frame-Options: DENY
-- X-Content-Type-Options: nosniff
-- Strict Referrer-Policy
-
-When adding new external resources, update the CSP meta tag in `src/layouts/BaseLayout.astro`.
-
-## Adding New Projects
-
-1. Create a new markdown file in `src/content/projects/`
-2. Add required frontmatter (title, description, status, tech)
-3. Write project content in markdown
-4. Rebuild with `docker compose up prod --build` to verify
-5. The project will automatically appear on the home page and get its own detail page at `/projects/[slug]/`
-
-## External Dependencies
-
-- Astro 5.x
-- TypeScript
-- Google Fonts: Inter (body text), JetBrains Mono (code/tags)
-
-## Deployment
-
-The site outputs static files to `dist/` and is configured for Cloudflare Pages deployment.
+Create a markdown file in `src/content/projects/` with frontmatter matching the schema in `src/content/config.ts` (required: `title`, `description`, `status`, `tech`). It auto-appears on the home page and gets a detail page.
