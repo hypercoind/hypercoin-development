@@ -5,6 +5,7 @@ status: development
 tech:
   - Python
   - VanillaJS
+  - D3.js
 icon: /images/hypercharts-icon.svg
 featured: true
 sortOrder: 3
