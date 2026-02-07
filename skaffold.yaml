@@ -1,0 +1,44 @@
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata:
+  name: hypercoin-dev
+build:
+  artifacts:
+    - image: hypercoin-dev
+      docker:
+        dockerfile: Dockerfile
+        target: production
+  local:
+    push: false
+deploy:
+  helm:
+    releases:
+      - name: hypercoin-dev
+        chartPath: ./k8s
+        namespace: hypercoin-dev
+        createNamespace: true
+profiles:
+  - name: dev
+    build:
+      artifacts:
+        - image: hypercoin-dev
+          docker:
+            dockerfile: Dockerfile
+            target: dev
+          sync:
+            manual:
+              - src: "src/**"
+                dest: /app
+              - src: "public/**"
+                dest: /app
+              - src: "astro.config.mjs"
+                dest: /app
+    deploy:
+      helm:
+        releases:
+          - name: hypercoin-dev
+            chartPath: ./k8s
+            namespace: hypercoin-dev
+            createNamespace: true
+            setValues:
+              containerPort: "4321"

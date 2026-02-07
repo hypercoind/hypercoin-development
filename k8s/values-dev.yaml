@@ -1,0 +1,15 @@
+image:
+  repository: node
+  tag: "20.18-alpine"
+  pullPolicy: IfNotPresent
+
+containerPort: 4321
+command: ["sh", "-c", "npm install && npm run dev -- --host 0.0.0.0"]
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi

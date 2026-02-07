@@ -1,13 +1,16 @@
-# Build stage
-FROM node:20.18-alpine AS build
+# Dependencies stage
+FROM node:20.18-alpine AS deps
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
+
+# Build stage
+FROM deps AS build
 COPY . .
 RUN npm run build
 
 # Production stage
-FROM nginx:1.27-alpine
+FROM nginx:1.27-alpine AS production
 
 # Create non-root user
 RUN addgroup -g 1001 -S appgroup && adduser -u 1001 -S appuser -G appgroup
@@ -28,3 +31,9 @@ RUN chown -R appuser:appgroup /usr/share/nginx/html && \
 USER appuser
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
+
+# Dev stage
+FROM deps AS dev
+COPY . .
+EXPOSE 4321
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

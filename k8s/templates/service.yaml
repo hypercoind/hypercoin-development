@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "hypercoin-dev.fullname" . }}
+  labels:
+    {{- include "hypercoin-dev.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.containerPort }}
+      protocol: TCP
+  selector:
+    {{- include "hypercoin-dev.selectorLabels" . | nindent 4 }}

@@ -28,3 +28,7 @@ pnpm-debug.log*
 
 # generated docs
 docs/TECHDEBT.md
+
+# Kubernetes
+k8s/values-secrets.yaml
+k8s/charts/
